@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clerk</title>
+    <meta http-equiv="refresh" content="4" >
+</head>
+<body>
+        <form action="" method="post" enctype="multipart/form-data">
+            <input type="submit"> <br>
+            {%for i in value %}
+                <input type="checkbox" name="bib" value={{i.bib}}>  {{i.bib}} {{i.name}} {{i.code}}  <br>
+            {%endfor%}
+
+        </form>
+
+
+</body>
+</html>
