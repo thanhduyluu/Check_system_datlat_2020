@@ -8,12 +8,13 @@ class Customer:
         return string == self.bib or string == self.name or string == self.code
     def compare_bib(self,string):
         return string == self.bib
-def read_data():
-    df = pd.read_excel("static/ds.xlsx")
+def read_data(path):
+    df = pd.read_excel(path)
     bib = [str(x) for x in df["bib"]]
     name = [str(x) for x in df["name"]]
     code = [str(x) for x in df["code"]]
     list_cus = []
+    print(code)
     for i in range(0,len(bib)):
         list_cus.append(Customer(bib[i], name[i], code[i]))
     return list_cus
