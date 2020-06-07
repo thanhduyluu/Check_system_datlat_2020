@@ -1,0 +1,15 @@
+<h5>
+{% for i in total %}
+    {{ i }}/
+{% endfor %}
+Total</h5>
+{% for i in value %}
+    <h5>
+    {% for j in value[i] %}
+        {{ j }}/
+        {% endfor %}
+
+            {{ i }}
+        </h5>
+
+{% endfor %}

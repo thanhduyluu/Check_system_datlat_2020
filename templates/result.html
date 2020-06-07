@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Result</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- ========== COMMON STYLES ========== -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" media="screen" >
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css" media="screen" >
+    <link rel="stylesheet" href="/static/css/animate-css/animate.min.css" media="screen" >
+    <link rel="stylesheet" href="/static/css/lobipanel/lobipanel.min.css" media="screen" >
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- ========== PAGE STYLES ========== -->
+    <link rel="stylesheet" href="/static/css/prism/prism.css" media="screen" > <!-- USED FOR DEMO HELP - YOU CAN REMOVE IT -->
+    <link rel="stylesheet" href="/static/css/toastr/toastr.min.css" media="screen" >
+    <link rel="stylesheet" href="/static/css/icheck/skins/line/blue.css" >
+    <link rel="stylesheet" href="/static/css/icheck/skins/line/red.css" >
+    <link rel="stylesheet" href="/static/css/icheck/skins/line/green.css" >
+    <link rel="stylesheet" href="/static/css/bootstrap-tour/bootstrap-tour.css" >
+
+    <!-- ========== THEME CSS ========== -->
+    <link rel="stylesheet" href="/static/css/result.css" media="screen" >
+
+    <!-- ========== MODERNIZR ========== -->
+    <script src="/static/js/modernizr/modernizr.min.js"></script>
+</head>
+<body>
+    <div class="flex-container">
+        <div style="flex-grow: 5">
+            <img src="../static/images/logo2.png"  alt="logo">
+        </div>
+        <div  style="flex-grow: 7">PARTICIPANT LIST</div>
+      </div>
+
+    <hr  width="100%" size="20px" align="center" color="black" height="10px">
+
+    <div class="container-responsive">
+        <div class="search-container">
+            <span>WELCOME TO DALAT ULTRA TRAIL</span>
+            <form >
+                <input type="text" placeholder="Your BIB Number here" name="input" >
+                <button type="submit">SEARCH</button>
+            </form>
+        </div>
+      </div>
+
+
+      <div class="table-responsive">
+       <table class="table">
+        <thead class="table1">
+          <tr>
+              <th scope="col">CHECK</th>
+              <th scope="col">ORDER ID</th>
+              <th scope="col">BIB</th>
+              <th scope="col">FULL NAME</th>
+              <th scope="col">ID/Passport</th>
+              <th scope="col">D.O.B</th>
+              <th scope="col">CATEGORY</th>
+              <th scope="col">PHONE NUMBER</th>
+              <th scope="col">EMAIL</th>
+          
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="customCheck1" checked>
+                  <label class="custom-control-label" for="customCheck1"></label>
+                                                      <td>{{i.code}}</td>
+                                                      <td>{{i.bib}}</td>
+                                                      <td>{{i.name}}</td>
+                                                      <td>{{i.DOB}}</td>
+                                                      <td>{{i.distance}}</td>
+                                                      <td>{{i.passport}}</td>
+                                                      <td>{{i.email}}</td>
+                                                      <td>{{i.phone}}</td>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+      </table>
+      </div>
+      <center>
+        <div class="input-field third-wrap">
+            <button class="btn-primary" type="submit" onclick="return is_check();">Submit</button>
+            <button class="btn-primary" type="submit" onclick="return toggle(this);">Check all and Submit</button>
+        </div>
+    </center>
+
+      
+
+</body>
+</html>

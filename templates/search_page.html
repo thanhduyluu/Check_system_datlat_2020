@@ -1,0 +1,307 @@
+<html>
+  <head>
+    <title>Customer - Check In</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="colorlib.com">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
+    <link href="/static/css/main2.css" rel="stylesheet" />
+    <!-- ========== COMMON STYLES ========== -->
+        <link rel="stylesheet" href="/static/css/bootstrap.min.css" media="screen" >
+        <link rel="stylesheet" href="/static/css/font-awesome.min.css" media="screen" >
+        <link rel="stylesheet" href="/static/css/animate-css/animate.min.css" media="screen" >
+        <link rel="stylesheet" href="/static/css/lobipanel/lobipanel.min.css" media="screen" >
+
+        <!-- ========== PAGE STYLES ========== -->
+        <link rel="stylesheet" href="/static/css/prism/prism.css" media="screen" > <!-- USED FOR DEMO HELP - YOU CAN REMOVE IT -->
+        <link rel="stylesheet" href="/static/css/toastr/toastr.min.css" media="screen" >
+        <link rel="stylesheet" href="/static/css/icheck/skins/line/blue.css" >
+        <link rel="stylesheet" href="/static/css/icheck/skins/line/red.css" >
+        <link rel="stylesheet" href="/static/css/icheck/skins/line/green.css" >
+        <link rel="stylesheet" href="/static/css/bootstrap-tour/bootstrap-tour.css" >
+
+        <!-- ========== THEME CSS ========== -->
+        <link rel="stylesheet" href="/static/css/main.css" media="screen" >
+
+        <!-- ========== MODERNIZR ========== -->
+        <script src="/static/js/modernizr/modernizr.min.js"></script>
+      <style>
+          .table tr:hover {
+              background-color: gold;
+          }
+          @media (min-width: 320px) and (max-width: 767px) {
+              .table-responsive,
+              .table-responsive thead,
+              .table-responsive tbody,
+              .table-responsive th,
+              .table-responsive td,
+              .table-responsive tr {
+                  display: block;
+              }
+
+              .table-responsive > thead > tr {
+                  position: absolute;
+                  top: -9999px;
+                  left: -9999px;
+              }
+          }
+
+      </style>
+  </head>
+  <body>
+      
+    <div class="text-center">
+        <img src="../static/images/DUT-Logo-02.png" class="rounded" alt="picture" style="max-width:100%;height:auto;">
+      </div>
+    <div class="s01">
+        <form name = "frmTest" id="frmTest" action="" method="post" enctype="multipart/form-data">
+           
+        <div class="inner-form">
+
+              <div class="input-field first-wrap">
+                <input id="id_search" name="id_search" type="text" placeholder="What are you looking for?" />
+              </div>
+              <div class="input-field third-wrap">
+                <button class="btn-search" type="submit" onclick="return check_text();">Search</button>
+              </div>
+        </div>
+        {% if value.error == "2" %}
+        <div >
+        	<section class="section pt-n">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="panel border-primary no-border border-3-top">
+                                            <div class="panel-heading">
+                                                <div class="panel-title">
+                                                    <h5>Table Data</h5>
+                                                </div>
+                                                <div class="row">
+                                    <div class="col-md-12 ">
+
+                                        <div class="panel">
+                                            <div class="panel-body p-20" style="overflow-x:auto;">
+
+                                                <table id="example" class="display table table-responsive table-bordered" cellspacing="0" width="100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Check</th>
+                                                            <th>Code</th>
+                                                            <th>BIB</th>
+                                                            <th>Name</th>
+                                                            <th>Birthday</th>
+                                                            <th>Distance</th>
+                                                            <th>ID/Passport</th>
+                                                            <th>Email</th>
+                                                            <th>Phone Number</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <!-- <tfoot>
+                                                        <tr>
+                                                            <th>Name</th>
+                                                            <th>Position</th>
+                                                            <th>Office</th>
+                                                            <th>Age</th>
+                                                            <th>Start date</th>
+                                                            <th>Salary</th>
+                                                        </tr>
+                                                    </tfoot> -->
+                                                    <tbody>
+                                                        {%for i in value.data %}
+                                                            <tr>
+                                                                <td><input type="checkbox" name="bib" value={{i.bib}}></td>
+                                                                <td>{{i.code}}</td>
+                                                                <td>{{i.bib}}</td>
+                                                                <td>{{i.name}}</td>
+                                                                <td>{{i.DOB}}</td>
+                                                                <td>{{i.distance}}</td>
+                                                                <td>{{i.passport}}</td>
+                                                                <td>{{i.email}}</td>
+                                                                <td>{{i.phone}}</td>
+                                                            </input>
+                                                            </tr>
+                                                        {%endfor%}
+                                                    </tbody>
+
+                                                </table>
+
+
+
+
+
+                                                <!-- /.col-md-12 -->
+                                            </div>
+                                            <center>
+                                                <div class="input-field third-wrap">
+                                                    <button class="btn-primary" type="submit" onclick="return is_check();">Submit</button>
+                                                    <button class="btn-primary" type="submit" onclick="return toggle(this);">Check all and Submit</button>
+                                                </div>
+                                            </center>
+                                        </div>
+                                    </div>
+                                            </div>
+                                            <div class="panel-body p-20">
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- /.col-md-8 -->
+
+                                    <!-- /.col-md-4 -->
+                                </div>
+                                <!-- /.row -->
+                            </div>
+                            <!-- /.container-fluid -->
+                        </section>
+        </div>
+
+        {% elif value.error == "1" %}
+            <div style="margin-top: 20px">
+                <section class="section pt-n">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel border-primary no-border border-3-top">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">
+                                            <center>
+                                                <h3 class="bg-success">You can pick up your race kit in POS {{ value.POS + 1 }}</h3>
+                                            </center>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- /.col-md-8 -->
+
+                                <!-- /.col-md-4 -->
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                        <!-- /.container-fluid -->
+                </section>
+            </div>
+        {% elif value.error == "3" %}
+            <div style="margin-top: 20px">
+                <section class="section pt-n">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel border-primary no-border border-3-top">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">
+                                            <center>
+                                                <h3 class="bg-warning" >Cannot find you information</h3>
+                                            </center>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- /.col-md-8 -->
+
+                                <!-- /.col-md-4 -->
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                        <!-- /.container-fluid -->
+                </section>
+            </div>
+
+        {% elif value.error == "4" %}
+            <div style="margin-top: 20px">
+                <section class="section pt-n">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel border-primary no-border border-3-top">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">
+                                            <center>
+                                                <h3 class="bg-warning" >You picking up race kit in POS {{ value.POS }}</h3>
+                                            </center>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- /.col-md-8 -->
+
+                                <!-- /.col-md-4 -->
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                        <!-- /.container-fluid -->
+                </section>
+            </div>
+
+
+        {% elif value.error == "5" %}
+            <div style="margin-top: 20px">
+                <section class="section pt-n">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel border-primary no-border border-3-top">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">
+                                            <center>
+                                                <h3 class="bg-warning" >You picked race kit in POS {{ value.POS }} at {{ value.time }} </h3>
+                                            </center>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- /.col-md-8 -->
+
+                                <!-- /.col-md-4 -->
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                        <!-- /.container-fluid -->
+                </section>
+            </div>
+        {% endif %}
+      </form>
+    </div>
+  </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+  <script>
+      function toggle() {
+          if (confirm("Are you sure to pick up all this race kit ") === false){
+              return false
+          }
+          var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+          for (var i = 0; i < checkboxes.length; i++) {
+                  checkboxes[i].checked = true;
+          }
+
+          return true
+
+      }
+      function is_check() {
+
+          var  a = false
+          var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+          for (var i = 0; i < checkboxes.length; i++) {
+              if (checkboxes[i].checked === true){
+                  a = true;
+              }
+          }
+          if (a === false){
+              alert("You must check least one item")
+          }else {
+              if (confirm("Are you sure to pick up this race kit") === true){
+                  return true
+              }
+          }
+          return false;
+      }
+      function check_text() {
+          if( document.getElementById('id_search').value === '' ){
+              alert("Search key is empty ! Please enter your search key");
+              return false
+          }
+          return true
+      }
+  </script>
+</html>

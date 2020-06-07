@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- ========== COMMON STYLES ========== -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" media="screen" >
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css" media="screen" >
+    <link rel="stylesheet" href="/static/css/animate-css/animate.min.css" media="screen" >
+    <link rel="stylesheet" href="/static/css/lobipanel/lobipanel.min.css" media="screen" >
+
+    <!-- ========== PAGE STYLES ========== -->
+    <link rel="stylesheet" href="/static/css/prism/prism.css" media="screen" > <!-- USED FOR DEMO HELP - YOU CAN REMOVE IT -->
+    <link rel="stylesheet" href="/static/css/toastr/toastr.min.css" media="screen" >
+    <link rel="stylesheet" href="/static/css/icheck/skins/line/blue.css" >
+    <link rel="stylesheet" href="/static/css/icheck/skins/line/red.css" >
+    <link rel="stylesheet" href="/static/css/icheck/skins/line/green.css" >
+    <link rel="stylesheet" href="/static/css/bootstrap-tour/bootstrap-tour.css" >
+
+    <!-- ========== THEME CSS ========== -->
+    <link rel="stylesheet" href="/static/css/login.css" media="screen" >
+
+    <!-- ========== MODERNIZR ========== -->
+    <script src="/static/js/modernizr/modernizr.min.js"></script>
+</head>
+<body>
+    <div class="flex-container">
+        <div style="flex-grow: 5">
+            <img src="../static/images/logo2.png"  alt="logo">
+        </div>
+        <div  style="flex-grow: 7">ADMIN LOGIN</div>
+      </div>
+
+    <hr  width="100%" size="20px" align="center" color="black" height="10px">
+
+    <div class="container">
+        <div class="search-container">
+            <span>PASSWORD (MIN. 8 CHARACTERS)</span>
+            <form style="display: flex;" >
+                <input type="text" placeholder="Password" name="password" id="password">
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+
+<!-- ========== COMMON JS FILES ========== -->
+<script src="/static/js/jquery/jquery-2.2.4.min.js"></script>
+<script src="/static/js/jquery-ui/jquery-ui.min.js"></script>
+<script src="/static/js/bootstrap/bootstrap.min.js"></script>
+<script src="/static/js/pace/pace.min.js"></script>
+<script src="/static/js/lobipanel/lobipanel.min.js"></script>
+<script src="/static/js/iscroll/iscroll.js"></script>
+
+<!-- ========== PAGE JS FILES ========== -->
+<script src="/static/js/prism/prism.js"></script>
+<script src="/static/js/waypoint/waypoints.min.js"></script>
+<script src="/static/js/counterUp/jquery.counterup.min.js"></script>
+<script src="/static/js/amcharts/amcharts.js"></script>
+<script src="/static/js/amcharts/serial.js"></script>
+<script src="/static/js/amcharts/plugins/export/export.min.js"></script>
+<link rel="stylesheet" href="/static/js/amcharts/plugins/export/export.css" type="text/css" media="all" />
+<script src="/static/js/amcharts/themes/light.js"></script>
+<script src="/static/js/toastr/toastr.min.js"></script>
+<script src="/static/js/icheck/icheck.min.js"></script>
+<script src="/static/js/bootstrap-tour/bootstrap-tour.js"></script>
+
+<!-- ========== THEME JS ========== -->
+<script src="/static/js/main.js"></script>
+<script src="/static/js/production-chart.js"></script>
+<script src="/static/js/traffic-chart.js"></script>
+<script src="/static/js/task-list.js"></script>
+<script>
+    $(function(){
+
+        // Counter for dashboard stats
+        $('.counter').counterUp({
+            delay: 10,
+            time: 1000
+        });
+
+        // Welcome notification
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "3500",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+        toastr["success"]("One stop solution to your website admin panel!", "Welcome to Options!");
+
+  
+</script>
+
+
+</body>
+</html>

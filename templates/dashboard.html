@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>DASHBOARD</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- ========== COMMON STYLES ========== -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" media="screen" >
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css" media="screen" >
+    <link rel="stylesheet" href="/static/css/animate-css/animate.min.css" media="screen" >
+    <link rel="stylesheet" href="/static/css/lobipanel/lobipanel.min.css" media="screen" >
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- ========== PAGE STYLES ========== -->
+    <link rel="stylesheet" href="/static/css/prism/prism.css" media="screen" > <!-- USED FOR DEMO HELP - YOU CAN REMOVE IT -->
+    <link rel="stylesheet" href="/static/css/toastr/toastr.min.css" media="screen" >
+    <link rel="stylesheet" href="/static/css/icheck/skins/line/blue.css" >
+    <link rel="stylesheet" href="/static/css/icheck/skins/line/red.css" >
+    <link rel="stylesheet" href="/static/css/icheck/skins/line/green.css" >
+    <link rel="stylesheet" href="/static/css/bootstrap-tour/bootstrap-tour.css" >
+
+    <!-- ========== THEME CSS ========== -->
+    <link rel="stylesheet" href="/dashboard.css" media="screen" >
+
+    <!-- ========== MODERNIZR ========== -->
+    <script src="/static/js/modernizr/modernizr.min.js"></script>
+</head>
+<body>
+    <div class="flex-container">
+        <div style="flex-grow: 5">
+            <img src="../static/images/logo2.png"  alt="logo">
+        </div>
+        <div  style="flex-grow: 7">DASHBOARD</div>
+      </div>
+
+    <hr  width="100%" size="20px" align="center" color="black" height="10px">
+
+
+    <div class="container-fluid">
+      
+      
+      <div class="row">
+        <div class="col-sm-5" style="background-color:white;"></div>
+        <div class="col-sm-2" style="text-align:center">
+        <span style="font-size: x-large; font-weight: bolder;">TOTAL</span>
+        <h2 style="background-color: red; padding: 10px;">1000  <span style="font-size: medium;">4500</span></h2>
+
+        </div>
+        <div class="col-sm-5" style="background-color:white;"></div>
+      </div>
+      <br>
+  
+      
+   
+      
+      <div class="row-justify-content-center">
+        <div class="col-xs-1"></div>
+        <div class="col-xs-2">
+          <span style="font-size: x-large; font-weight: bolder;">10KM</span>
+        <h2 style="text-align: center;background-color: MidnightBlue; padding: 10px;">800 <span style="font-size: medium;">1000</span></h2>
+        </div>
+        <div class="col-xs-2">
+          <span style="font-size: x-large; font-weight: bolder;">21KM</span>
+        <h2 style="text-align: center; background-color: MidnightBlue; padding: 10px;">800 <span style="font-size: medium;">1000</span></h2>
+
+        </div>
+        <div class="col-xs-2">
+          <span style="font-size: x-large; font-weight: bolder;">42KM</span>
+        <h2 style="text-align: center; background-color: MidnightBlue; padding: 10px;">800 <span style="font-size: medium;">1000</span></h2>
+      </div>
+        <div class="col-xs-2">
+          <span style="font-size: x-large; font-weight: bolder;">70KM</span>
+          <h2 style="text-align: center; background-color: MidnightBlue; padding: 10px;">800 <span style="font-size: medium;">1000</span></h2>
+        </div>
+        <div class="col-xs-2">
+          <span style="font-size: x-large; font-weight: bolder;">100KM</span>
+          <h2 style="text-align: center; background-color: MidnightBlue; padding: 10px;">800 <span style="font-size: medium;">1000</span></h2>
+        </div>
+        <div class="col-xs-1"></div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="table-responsive">
+    <table class="table">
+     <thead class="table1">
+       <tr>
+           
+           <th scope="col">ORDER ID</th>
+           <th scope="col">BIB</th>
+           <th scope="col">FULL NAME</th>
+           <th scope="col">ID/Passport</th>
+           <th scope="col">D.O.B</th>
+           <th scope="col">CATEGORY</th>
+           <th scope="col">PHONE NUMBER</th>
+           <th scope="col">PICK-UP INFO</th>
+           <th scope="col">DATE</th>
+           <th scope="col">POS</th>
+       
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td>
+           <div class="custom-control custom-checkbox">
+                                                                
+                                                   <td>{{i.bib}}</td>
+                                                   <td>{{i.name}}</td>
+                                                   <td>{{i.passport}}</td>
+                                                   <td>{{i.DOB}}</td>
+                                                   <td>{{i.distance}}</td>
+                                                   <td>{{i.phone}}</td>
+                                                   <td>{{i.email}}</td>
+                                                   
+           </div>
+         </td>
+       </tr>
+       </tbody>
+   </table>
+   </div>
+   
+  
+
+    
+
+
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+
+{% if value.error == "1" %}
+    {%for d in value.data %}
+        {%for i in d %}
+            <tr>
+                <td><input type="checkbox" name="bib" value={{i.bib}}></td>
+                <td>{{i.code}}</td>
+                <td>{{i.bib}}</td>
+                <td>{{i.name}}</td>
+                <td>{{i.DOB}}</td>
+                <td>{{i.distance}}</td>
+                <td>{{i.passport}}</td>
+                <td>{{i.email}}</td>
+                <td>{{i.phone}}</td>
+            </tr>
+        {%endfor%}
+    {% endfor %}
+{% elif value.error == "2" %}
+    {%for d in value.data %}
+        <tr>
+            <td>
+                <input type="checkbox" onclick="toggle(this,{{ d[0].code}});" />Check all Group<br />
+            </td>
+        </tr>
+        {%for i in d %}
+            <tr>
+                <td>
+                    <input id={{ i.code }} type="checkbox" name="bib" value={{i.bib}} style="display:none">
+                </td>
+                <td>{{i.code}}</td>
+                <td>{{i.bib}}</td>
+                <td>{{i.name}}</td>
+                <td>{{i.DOB}}</td>
+                <td>{{i.distance}}</td>
+                <td>{{i.passport}}</td>
+                <td>{{i.email}}</td>
+                <td>{{i.phone}}</td>
+
+            </tr>
+        {%endfor%}
+    {% endfor %}
+{% endif %}
