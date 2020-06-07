@@ -1,0 +1,98 @@
+body{
+	font-family: Tahoma;
+}
+@media (min-width: 187px)  { 
+	.flex-container {
+		display: flex;
+		align-items: stretch;
+		background-color: white;
+		padding-top: 30px;
+	}
+	  
+	.flex-container > div {
+		width: 100px;
+		
+		text-align: center;
+		line-height: 75px;
+		font-size: 20px;
+		font-weight: bolder;
+		color: MidnightBlue;
+	  }
+	  
+	  
+
+}
+@media (min-width: 600px) {
+	html, body {
+	  font-size: calc( 12px + (14 - 12) * ((100vw - 600px) / (1140 - 600)));
+	}
+  }
+
+  
+hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 0;
+    border-top: 3px solid MidnightBlue ;
+}
+
+.container-responsive {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 60px;
+    padding-right: 60px;
+	margin-top: 40px;
+	margin-bottom: 80px;
+}
+.search-container{
+	border: 1px solid #ddd;
+	background-color: #ddd;
+	padding-left: 60px;
+    padding-right: 60px;
+    padding-bottom: 50px;
+	border-top: 3px solid midnightblue;
+
+}
+.search-container input{
+    width: 80%;
+    padding: 15px;
+    margin-right: 5px;
+    border: 1px solid black;
+	
+}
+.search-container button{
+    margin-top: 5px;
+    padding: 15px;
+	border: 1px solid MidnightBlue;
+	color: whitesmoke;
+	background-color: MidnightBlue;
+	font-weight: bolder;
+
+}
+.search-container span{
+	width: 60%;
+	font-weight: bolder;
+	line-height: 75px;
+	font-size: 22px;
+	color: MidnightBlue;
+}
+
+.table-responsive{
+	padding-left: 60px;
+	padding-right: 60px;
+}
+
+.table1{
+	color: white;
+	background-color: midnightblue;
+	border: 1px solid midnightblue;
+}
+
+.btn-primary {
+    margin-top: 10px;
+    padding: 9px;
+	border: 1px solid MidnightBlue;
+	color: whitesmoke;
+	background-color: MidnightBlue;
+	font-weight: bolder;
+}

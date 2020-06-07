@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="/static/css/bootstrap-tour/bootstrap-tour.css" >
 
     <!-- ========== THEME CSS ========== -->
-    <link rel="stylesheet" href="/dashboard.css" media="screen" >
+    <link rel="stylesheet" href="/static/css/login.css" media="screen" >
 
     <!-- ========== MODERNIZR ========== -->
     <script src="/static/js/modernizr/modernizr.min.js"></script>
@@ -39,91 +39,42 @@
     <hr  width="100%" size="20px" align="center" color="black" height="10px">
 
 
-    <div class="container-fluid">
-      
-      
-      <div class="row">
-        <div class="col-sm-5" style="background-color:white;"></div>
-        <div class="col-sm-2" style="text-align:center">
-        <span style="font-size: x-large; font-weight: bolder;">TOTAL</span>
-        <h2 style="background-color: red; padding: 10px;">1000  <span style="font-size: medium;">4500</span></h2>
-
-        </div>
-        <div class="col-sm-5" style="background-color:white;"></div>
-      </div>
-      <br>
-  
-      
-   
-      
-      <div class="row-justify-content-center">
-        <div class="col-xs-1"></div>
-        <div class="col-xs-2">
-          <span style="font-size: x-large; font-weight: bolder;">10KM</span>
-        <h2 style="text-align: center;background-color: MidnightBlue; padding: 10px;">800 <span style="font-size: medium;">1000</span></h2>
-        </div>
-        <div class="col-xs-2">
-          <span style="font-size: x-large; font-weight: bolder;">21KM</span>
-        <h2 style="text-align: center; background-color: MidnightBlue; padding: 10px;">800 <span style="font-size: medium;">1000</span></h2>
-
-        </div>
-        <div class="col-xs-2">
-          <span style="font-size: x-large; font-weight: bolder;">42KM</span>
-        <h2 style="text-align: center; background-color: MidnightBlue; padding: 10px;">800 <span style="font-size: medium;">1000</span></h2>
-      </div>
-        <div class="col-xs-2">
-          <span style="font-size: x-large; font-weight: bolder;">70KM</span>
-          <h2 style="text-align: center; background-color: MidnightBlue; padding: 10px;">800 <span style="font-size: medium;">1000</span></h2>
-        </div>
-        <div class="col-xs-2">
-          <span style="font-size: x-large; font-weight: bolder;">100KM</span>
-          <h2 style="text-align: center; background-color: MidnightBlue; padding: 10px;">800 <span style="font-size: medium;">1000</span></h2>
-        </div>
-        <div class="col-xs-1"></div>
+    
+<div >
+    
+    <div class="row">
+      <div class="col bg-success">
+        <h3 style="text-align: center;">TOTAL</h3>
+                  <h2 style="background-color: red;">  1000   <span style="font-size: medium;padding-left: 4px; ">4500</span></h2>
       </div>
     </div>
+    <br>
+    
+    <br>
+    <div class="row">
+      <div class="col bg-success">
+        <span>10KM</span>
+        <span style="background-color: blue;">  800<span style="font-size: medium;padding-left:6px">1000</span></span>
+      </div>
+      <div class="col bg-warning">
+        <span>10KM</span>
+        <span style="background-color: blue;">  800<span style="font-size: medium;padding-left:6px">1000</span></span>
+      </div>
+      <div class="col bg-success">
+        <span>10KM</span>
+        <span style="background-color: blue;">  800<span style="font-size: medium;padding-left:6px">1000</span></span>
+      </div>
+      <div class="col bg-warning">
+        <span>10KM</span>
+        <span style="background-color: blue;">  800<span style="font-size: medium;padding-left:6px">1000</span></span>
+      </div>
+      <div class="col bg-success">
+        <span>10KM</span>
+        <span style="background-color: blue;">  800<span style="font-size: medium;padding-left:6px">1000</span></span>
+      </div>
+    </div>
+
   </div>
-
-  <br>
-
-  <div class="table-responsive">
-    <table class="table">
-     <thead class="table1">
-       <tr>
-           
-           <th scope="col">ORDER ID</th>
-           <th scope="col">BIB</th>
-           <th scope="col">FULL NAME</th>
-           <th scope="col">ID/Passport</th>
-           <th scope="col">D.O.B</th>
-           <th scope="col">CATEGORY</th>
-           <th scope="col">PHONE NUMBER</th>
-           <th scope="col">PICK-UP INFO</th>
-           <th scope="col">DATE</th>
-           <th scope="col">POS</th>
-       
-       </tr>
-     </thead>
-     <tbody>
-       <tr>
-         <td>
-           <div class="custom-control custom-checkbox">
-                                                                
-                                                   <td>{{i.bib}}</td>
-                                                   <td>{{i.name}}</td>
-                                                   <td>{{i.passport}}</td>
-                                                   <td>{{i.DOB}}</td>
-                                                   <td>{{i.distance}}</td>
-                                                   <td>{{i.phone}}</td>
-                                                   <td>{{i.email}}</td>
-                                                   
-           </div>
-         </td>
-       </tr>
-       </tbody>
-   </table>
-   </div>
-   
   
 
     

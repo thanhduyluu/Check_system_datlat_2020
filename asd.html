@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /* Style for table */
+        .table-customize {
+            margin: 0;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 0 0 1px #ccc inset;
+        }
+        .table-customize > thead > tr {
+            background-color: #535353;
+            border-radius: 3px 3px 0 0;
+        }
+        .table-customize > thead > tr > th {
+            color: #fff;
+            border-bottom: none;
+            padding: 10px 14px;
+            font-size: 14px;
+            font-weight: 400;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+        }
+        .table-customize > thead > tr > th:first-child {
+            border-radius: 3px 0 0 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.2);
+        }
+        .table-customize > thead > tr > th:last-child {
+            border-radius: 0 3px 0 0;
+        }
+        .table-customize > tbody > tr > td {
+            vertical-align: middle;
+            padding: 15px 14px;
+            color: #ccc;
+            font-size: 14px;
+            color: #000;
+            border: 1px solid #ccc;
+        }
+        .table-customize > tbody > tr > td a {
+            text-decoration: none;
+        }
+
+        .table-order > tbody > tr:nth-child(-n + 3) > td:first-child {
+            position: relative;
+            font-size: 10px;
+            font-weight: 700;
+        }
+        .table-order > tbody > tr:nth-child(-n + 3) > td:first-child span {
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: auto;
+            top: 14px;
+        }
+        .table-order > tbody > tr:nth-child(1) > td:first-child {
+            background: url(../img/bg-order-1.png) no-repeat center center;
+        }
+        .table-order > tbody > tr:nth-child(2) > td:first-child {
+            background: url(../img/bg-order-2.png) no-repeat center center;
+        }
+        .table-order > tbody > tr:nth-child(3) > td:first-child {
+            background: url(../img/bg-order-3.png) no-repeat center center;
+        }
+        .table-order > tbody > tr td:first-child, .table-order > tbody > tr th:first-child {
+            text-align: center;
+        }
+
+
+        @media
+        only screen and (max-width: 760px),
+        (min-device-width: 768px) and (max-device-width: 1024px)  {
+
+            /* Force table to not be like tables anymore */
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            /* Hide table headers (but not display: none;, for accessibility) */
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            tr { border: 1px solid #ccc; }
+
+            td {
+                /* Behave  like a "row" */
+                border: none;
+                border-bottom: 1px solid #eee;
+                position: relative;
+                padding-left: 50%;
+            }
+
+            td:before {
+                /* Now like a table header */
+                position: absolute;
+                /* Top/left values mimic padding */
+                top: 6px;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+            }
+            td:nth-of-type(1):before { content: "Check"; }
+            td:nth-of-type(2):before { content: "Code"; }
+            td:nth-of-type(3):before { content: "BIB"; }
+            td:nth-of-type(4):before { content: "Name"; }
+            td:nth-of-type(5):before { content: "Birthday"; }
+            td:nth-of-type(6):before { content: "Distance"; }
+            td:nth-of-type(7):before { content: "ID/Passport"; }
+            td:nth-of-type(8):before { content: "Email"; }
+            td:nth-of-type(9):before { content: "Phone Number"; }
+        }
+    </style>
+</head>
+<body>
+<table class="table table-bordered table-customize table-responsive">
+    <thead>
+    <tr>
+        <th>Task</th>
+        <th>Category</th>
+        <th>Point</th>
+        <th>User</th>
+        <th>Time</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td data-title="Task"><a href="/task/138">The Very Beginning</a></td>
+        <td data-title="Category">Logic Game</td>
+        <td data-title="Point">10</td>
+        <td data-title="User"><a href="/user/profile/55"><img src="http://www.gravatar.com/avatar/c4f70b92d051f8323e18b24030f0d045?d=mm&s=24" alt="KhanhLD" title="KhanhLD"/></img> <span class="text-danger">KhanhLD</span></a></td>
+        <td data-title="Time">2016-06-18 10:22:45</td>
+    </tr>
+
+    <tr>
+        <td data-title="Task"><a href="/task/100">The Dead Clock</a></td>
+        <td data-title="Category">Logic Game</td>
+        <td data-title="Point">20</td>
+        <td data-title="User"><a href="/user/profile/2"><img src="http://www.gravatar.com/avatar/90b36c196a46f35da8c4fd1244cf15fd?d=mm&s=24" alt="bs90" title="bs90"/></img> <span class="text-danger">bs90</span></a></td>
+        <td data-title="Time">2016-06-18 11:12:44</td>
+    </tr>
+
+    <tr>
+        <td data-title="Task"><a href="/task/101">The Fotation</a></td>
+        <td data-title="Category">Logic Game</td>
+        <td data-title="Point">20</td>
+        <td data-title="User"><a href="/user/profile/2"><img src="http://www.gravatar.com/avatar/90b36c196a46f35da8c4fd1244cf15fd?d=mm&s=24" alt="bs90" title="bs90"/></img> <span class="text-danger">bs90</span></a></td>
+        <td data-title="Time">2016-06-18 11:13:11</td>
+    </tr>
+
+    <tr>
+        <td data-title="Task"><a href="/task/107">Hello world!</a></td>
+        <td data-title="Category">Logic Game</td>
+        <td data-title="Point">10</td>
+        <td data-title="User"><a href="/user/profile/2"><img src="http://www.gravatar.com/avatar/90b36c196a46f35da8c4fd1244cf15fd?d=mm&s=24" alt="bs90" title="bs90"/></img> <span class="text-danger">bs90</span></a></td>
+        <td data-title="Time">2016-06-18 18:10:32</td>
+    </tr>
+
+    <tr>
+        <td data-title="Task"><a href="/task/137">Picking CEO</a></td>
+        <td data-title="Category">Logic Game</td>
+        <td data-title="Point">5</td>
+        <td data-title="User"><a href="/user/profile/2"><img src="http://www.gravatar.com/avatar/90b36c196a46f35da8c4fd1244cf15fd?d=mm&s=24" alt="bs90" title="bs90"/></img> <span class="text-danger">bs90</span></a></td>
+        <td data-title="Time">2016-06-20 10:30:03</td>
+    </tr>
+    </tbody>
+</table>
+
+
+</body>
+</html>

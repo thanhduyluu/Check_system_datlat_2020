@@ -3,15 +3,21 @@
     {%for d in value.data %}
         {%for i in d %}
             <tr>
-                <td><input type="checkbox" name="bib" value={{i.bib}}></td>
+                <td>
+                    <div class="custom-control custom-checkbox mb-3">
+                        <input type="checkbox" class="custom-control-input" id="{{ i.bib }}" name="bib" value="{{ i.bib }}">
+                        <label class="custom-control-label" for="{{ i.bib }}" ></label>
+                    </div>
+                </td>
                 <td>{{i.code}}</td>
                 <td>{{i.bib}}</td>
                 <td>{{i.name}}</td>
+                <td>{{i.passport}}</td>
                 <td>{{i.DOB}}</td>
                 <td>{{i.distance}}</td>
-                <td>{{i.passport}}</td>
-                <td>{{i.email}}</td>
                 <td>{{i.phone}}</td>
+                <td>{{i.email}}</td>
+
             </tr>
         {%endfor%}
     {% endfor %}
@@ -19,23 +25,35 @@
     {%for d in value.data %}
         <tr>
             <td>
-                <input type="checkbox" onclick="toggle(this,{{ d[0].code}});" />Check all Group<br />
+                <div class="custom-control custom-checkbox mb-3">
+                    <input type="checkbox" class="custom-control-input" id="{{ d[0].code + d[0].bib }}" onclick="toggle(this,{{ d[0].code + d[0].bib }});" />
+                    <label class="custom-control-label" for="{{ d[0].code + d[0].bib }}" > Check This Group</label>
+                </div>
             </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+
+
         </tr>
         {%for i in d %}
             <tr>
                 <td>
-                    <input id={{ i.code }} type="checkbox" name="bib" value={{i.bib}} style="display:none">
+                    <input id={{ i.code + d[0].bib }} type="checkbox" name="bib" value={{i.bib}} style="display:none" >
                 </td>
                 <td>{{i.code}}</td>
                 <td>{{i.bib}}</td>
                 <td>{{i.name}}</td>
+                <td>{{i.passport}}</td>
                 <td>{{i.DOB}}</td>
                 <td>{{i.distance}}</td>
-                <td>{{i.passport}}</td>
-                <td>{{i.email}}</td>
                 <td>{{i.phone}}</td>
-
+                <td>{{i.email}}</td>
             </tr>
         {%endfor%}
     {% endfor %}

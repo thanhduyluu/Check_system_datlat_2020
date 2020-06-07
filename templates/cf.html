@@ -1,6 +1,8 @@
     <!DOCTYPE html>
+
     <html>
     <head>
+        <title>POS PASSCODE  - Check In</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,13 +24,19 @@
             table, th, td {
                 border: 1px solid #111150;
                 border-collapse: collapse;
-                color: white;
-                background-color: #111150;
                 margin-right: auto;
                 margin-left: auto;
                 padding-left: 15px;
                 padding-right: 15px;
                 height: 40px;
+            }
+            th{
+                color: white;
+                background-color: #111150;
+            }
+            td{
+                color: black;
+                font-weight: bold;
             }
             
         </style>
@@ -44,15 +52,18 @@
     <hr  width="100%" size="2px" align="center" color="black" height="10px">
 
     <table style="width:70% " >
-       
+       <thead>
         <tr>
             <th>NO</th>
             <th>POS</th>
             <th>RACE CATEGORY</th>
             <th>PASSCODE</th>
         </tr>
+       </thead>
+    <tbody>
         {% for i in value %}
         <tr>
+            <td>{{ i[0] + 1 }}</td>
             <td>{{ i[0] + 1 }}</td>
 
             {% if i[1][0] == "True" %}
@@ -64,6 +75,7 @@
             <td>{{ i[2] }}</td>
         </tr>
         {% endfor %}
+    </tbody>
     </table>
 
     </body>

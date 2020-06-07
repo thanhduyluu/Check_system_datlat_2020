@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Search Customer</title>
+      <title>POS {{ value.id + 1 }} - Check In</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -29,12 +29,15 @@
   
 <h4 class="text-center mt-4"><img  src="../static/images/Raceez-Fast Moving-03.png" class="text-center mt-4" alt="logo" style="width:60%" ></h4>
 
+
 <div class="container">
   <div class="search-container">
-      <span>WELCOME TO DALAT ULTRA TRAIL</span>
-      <form >
-          <input type="text" placeholder="Your BIB Number here" name="input" >
-          <button type="submit">SEARCH</button>
+      <span><div  style="flex-grow: 7">POS {{ value.id + 1 }} - {{ value.category }}</div>
+              WELCOME TO DALAT ULTRA TRAIL
+      </span>
+      <form  method="post" enctype="multipart/form-data" action="/new_clerk">
+          <input id="id_search" name="id_search" type="text" placeholder="Your BIB Number here">
+          <button type="submit" onclick="return check_text();">SEARCH</button>
       </form>
   </div>
 </div>
@@ -51,9 +54,37 @@
 
 
       
-  
+
   
 </body>
 
+<script>
+
+    if ({{ value.error }} == "3"){
+        window.alert("Cannot find you information")
+    }
+    if ({{ value.error }} =="4"){
+        window.alert("Your race kit is picking  in POS {{ value.POS }}")
+    }
+    if ({{ value.error }} == "5"){
+        window.alert("Your race kit is picked in POS {{ value.POS }} at {{ value.time }}")
+    }
+    if ({{ value.error }} == "1"){
+        window.alert("You can pickup your race kit in POS {{ value.POS }}")
+    }
+    if ({{ value.error }} == "6"){
+        window.alert("POS not matching your distance. This POS only cover {{ value.category }} distance")
+    }
+
+    function check_text() {
+        if( document.getElementById('id_search').value === '' ){
+            alert("Search key is empty ! Please enter your search key");
+            return false
+        }
+        return true
+    }
+
+
+</script>
 
 </html>

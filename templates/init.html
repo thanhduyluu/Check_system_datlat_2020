@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Create Machine</title>
+    <title>CREATE MACHINE  - Check In</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -40,20 +40,33 @@
 
       <div class="container">
         <div class="search-container">
-            <span>POS NUMBER</span>
-            <form style="display: flex;" >
-                <input type="text" placeholder="" name="psw" >
-               
+            <form action="/create_session" method="post" enctype="multipart/form-data">
+            <span style="font-size:2vw;">POS NUMBER</span>
+
+            <div style="display: flex;" >
+                <input type="text" name="index" id="index" required >
+            </div>
+            {% if value.error == "1" %}
+                <i style="color: red; font-size:1.5vw;">*Your POS is not correct!</i> <br>
+            {% endif %}
+            {% if value.error == "3" %}
+                <i style="color: red;font-size:1.5vw; ">*POS has not been initialized yet!</i><br>
+            {% endif %}
+            <span style="font-size:2vw;">PASSCODE (*Please contact admin to get passcode)</span>
+
+            <div style="display: flex;" >
+                <input type="text" name="pw" id="pw" required  >
+            </div>
+            {% if value.error == "2" %}
+                <i style="color: red;font-size:1.5vw; ">*Your passcode is not correct, please contact to your manager!</i><br>
+            {% endif %}
+            <button id="create" type="submit">CREATE</button>
             </form>
-            <span>PASSCODE (*Please contact admin to get passcode)</span>
-            <form style="display: flex;" >
-                <input type="text" placeholder="" name="psw" >
-               
-            </form>
+
         </div>
         
     </div>
-    <button id="create" type="submit">CREATE</button>
+
 
 <!-- ========== COMMON JS FILES ========== -->
 <script src="/static/js/jquery/jquery-2.2.4.min.js"></script>

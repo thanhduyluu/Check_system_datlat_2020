@@ -40,10 +40,14 @@
     <div class="container">
         <div class="search-container">
             <span>PASSWORD (MIN. 8 CHARACTERS)</span>
-            <form style="display: flex;" >
-                <input type="text" placeholder="Password" name="password" id="password">
+            <form style="display: flex;" id="form1" name="form1" action="/login" method="post" enctype="multipart/form-data">
+                <input type="password" placeholder="Password" name="pw" id="pw" required>
                 <button type="submit">Login</button>
+
             </form>
+            {% if error == "1" %}
+                <br><i style="color: red; font-size:1.5vw;">*Your Password is not correct, please contact your manager!</i> <br>
+            {% endif %}
         </div>
     </div>
 

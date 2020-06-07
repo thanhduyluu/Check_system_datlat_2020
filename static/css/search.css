@@ -1,0 +1,48 @@
+body{
+	font-family: Tahoma;
+}
+@media (min-width: 600px) {
+	html, body {
+	  font-size: calc( 12px + (14 - 12) * ((100vw - 600px) / (1140 - 600)));
+	}
+  }
+
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 60px;
+    padding-right: 60px;
+	margin-top: 40px;
+	margin-bottom: 80px;
+}
+.search-container{
+	border: 1px solid #ddd;
+	background-color: #ddd;
+	padding-left: 60px;
+	padding-right: 60px;
+	border-top: 3px solid midnightblue;
+
+}
+.search-container input{
+    width: 80%;
+    padding: 15px;
+    margin-right: 5px;
+    border: 1px solid black;
+	
+}
+.search-container button{
+    margin-top: 5px;
+    padding: 15px;
+	border: 1px solid MidnightBlue;
+	color: whitesmoke;
+	background-color: MidnightBlue;
+	font-weight: bolder;
+
+}
+.search-container span{
+	width: 60%;
+	font-weight: bolder;
+	line-height: 75px;
+	font-size: 22px;
+	color: MidnightBlue;
+}
