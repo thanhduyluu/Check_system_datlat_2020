@@ -39,45 +39,104 @@
       </div>
 
     <hr  width="100%" size="20px" align="center" color="black" height="10px">
+    <div class="container">
+          <div class="search-container">
+              <form  method="post" enctype="multipart/form-data" action="/change">
+                  <input id="id_search" name="id_search" type="text" placeholder="Your BIB Number here">
+                  <button type="submit" onclick="return check_text();">SEARCH</button>
+              </form>
+          </div>
+    </div>
+    {% if value.error == "1" %}
+    {% for i in value.data %}
+    <form  method="post" enctype="multipart/form-data" action="/change" style="margin: 20px;">
 
-    <form style="margin: 20px;">
+
         <div class="row justify-content-md-center">
           <div class="form-group col-sm-8">
             <label for="inputBIB">BIB</label>
-            <input type="email" class="form-control" id="inputEmail4" placeholder="ID">
+
+            <input name="user" value="{{i.bib}}" type="text" class="form-control" id="inputEmail4" >
           </div>
-         
-        
-       
+
+
+
         <div class="form-group col-sm-8">
           <label for="inputName">Full Name</label>
-          <input type="text" class="form-control" id="inputName" placeholder="Full Name">
+          <input name="user" value="{{i.name}}" type="text" class="form-control" id="inputName" placeholder="Full Name">
         </div>
-        
-      
+
+
         <div class="form-group col-sm-8">
           <label for="inputAddress2">Identification/Passport</label>
-          <input type="text" class="form-control" id="inputID" placeholder="id/passport">
+          <input name="user" value="{{i.passport}}" type="text" class="form-control" id="inputID" placeholder="id/passport">
         </div>
 
-        
 
-        
+
+
           <div class="form-group col-sm-8">
             <label for="inputCity">Day Of Birth</label>
-            <input type="text" class="form-control" id="inputDOB" placeholder="dd/mm/yyyy">
+            <input name="user" value="{{i.DOB}}" type="text" class="form-control" id="inputDOB" placeholder="dd/mm/yyyy">
           </div>
-         
+
           <div class="form-group col-sm-8">
             <label for="inputZip">Phone Number</label>
-            <input type="text" class="form-control" id="inputphone" placeholder="phone">
+            <input name="user"  value="{{i.phone}}" type="text" class="form-control" id="inputphone" placeholder="phone">
           </div>
           <div class="form-group col-sm-8">
             <label for="inputEmail4">Email</label>
-            <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+            <input name="user"  value="{{i.email}}" type="email" class="form-control" id="inputEmail4" placeholder="Email">
           </div>
         </div>
-     
+        {% endfor %}
+        {% else %}
+        <form  method="post" enctype="multipart/form-data" action="/change" style="margin: 20px;">
+
+
+        <div class="row justify-content-md-center">
+          <div class="form-group col-sm-8">
+            <label for="inputBIB">BIB</label>
+            <input name="user"  type="text" class="form-control" id="inputEmail4" placeholder="BIB">
+          </div>
+
+
+
+        <div class="form-group col-sm-8">
+          <label for="inputName">Full Name</label>
+          <input name="user"  type="text" class="form-control" id="inputName" placeholder="Full Name">
+        </div>
+
+
+        <div class="form-group col-sm-8">
+          <label for="inputAddress2">Identification/Passport</label>
+          <input name="user"  type="text" class="form-control" id="inputID" placeholder="id/passport">
+        </div>
+
+
+
+
+          <div class="form-group col-sm-8">
+            <label for="inputCity">Day Of Birth</label>
+            <input name="user"  type="text" class="form-control" id="inputDOB" placeholder="dd/mm/yyyy">
+          </div>
+
+          <div class="form-group col-sm-8">
+            <label for="inputZip">Phone Number</label>
+            <input name="user"   type="text" class="form-control" id="inputphone" placeholder="phone">
+          </div>
+            <div class="form-group col-sm-8">
+            <label for="inputZip">Category</label>
+            <input name="user"   type="text" class="form-control" id="inputphone" placeholder="Distance">
+          </div>
+          <div class="form-group col-sm-8">
+            <label for="inputEmail4">Email</label>
+            <input name="user"  type="email" class="form-control" id="inputEmail4" placeholder="Email">
+          </div>
+        </div>
+            {%endif%}
+
+
         <div class="row justify-content-md-center">
         <button type="submit" class="btn btn-primary">Submit</button>
         </div>
@@ -88,4 +147,17 @@
       
 
 </body>
+<script>
+    {% if value.error  == "3"%}
+    alert("Not Found")
+    {%endif%}
+    {% if value.error  == "5"%}
+    alert("Change Success")
+    {%endif%}
+    {% if value.error  == "4"%}
+    alert("Add Success")
+    {%endif%}
+
+</script>
+
 </html>

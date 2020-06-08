@@ -78,8 +78,8 @@ hr {
 }
 
 .table-responsive{
-	padding-left: 60px;
-	padding-right: 60px;
+	padding-left: 20px;
+	padding-right: 20px;
 }
 
 .table1{
@@ -95,4 +95,76 @@ hr {
 	color: whitesmoke;
 	background-color: MidnightBlue;
 	font-weight: bolder;
+}
+
+.modal-body {
+    position: relative;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    text-align: left;
+	padding: 2rem;
+	background-color: #ddd;
+}
+
+.form-row {
+   
+    margin-right: -5px;
+    margin-left: -5px;
+    margin-bottom: 25px;
+}
+
+.modal-footer-center{
+	margin-bottom: 20px;
+	margin-top: 10px;
+	
+
+}
+.btnr{
+	color: white;
+    border: 0.5px solid MidnightBlue;
+    background-color: MidnightBlue;
+    width: 18%;
+    height: 51px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.close {
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #eee;
+    text-shadow: 0 1px 0 #eee;
+	opacity: 1;
+
+}
+.modal-header .close {
+    padding: 1rem 1rem;
+	margin: -1rem -1rem -1rem auto;
+	background-color: #731717;
+}
+.modal-title {
+    margin-bottom: 0;
+    line-height: 1.5;
+    font-weight: bold;
+    color: midnightblue;
+}
+
+.custom-control1{
+    margin-top:80px;
+    margin-left:25px;
+}
+
+.custom-control2{
+
+    margin-right:55px;
+}
+
+@media (min-width: 810px) and (max-width: 991.98px){
+    .custom-control2 {
+        width: 400px;
+        margin-left: 50px;
+
+        }
 }

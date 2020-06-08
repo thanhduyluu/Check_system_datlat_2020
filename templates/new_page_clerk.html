@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <title>POS {{ value.id + 1 }} - Check In</title>
-    <meta charset="utf-8">
+        <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -12,24 +12,26 @@
     <link rel="stylesheet" href="/static/css/font-awesome.min.css" media="screen" >
     <link rel="stylesheet" href="/static/css/animate-css/animate.min.css" media="screen" >
     <link rel="stylesheet" href="/static/css/lobipanel/lobipanel.min.css" media="screen" >
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
 
     <!-- ========== PAGE STYLES ========== -->
-    <link rel="stylesheet" href="/static/css/prism/prism.css" media="screen" > <!-- USED FOR DEMO HELP - YOU CAN REMOVE IT -->
-    <link rel="stylesheet" href="/static/css/toastr/toastr.min.css" media="screen" >
+    <!-- <link rel="stylesheet" href="/static/css/prism/prism.css" media="screen" >  -->
+    <!-- <link rel="stylesheet" href="/static/css/toastr/toastr.min.css" media="screen" >
     <link rel="stylesheet" href="/static/css/icheck/skins/line/blue.css" >
     <link rel="stylesheet" href="/static/css/icheck/skins/line/red.css" >
     <link rel="stylesheet" href="/static/css/icheck/skins/line/green.css" >
-    <link rel="stylesheet" href="/static/css/bootstrap-tour/bootstrap-tour.css" >
-
+    <link rel="stylesheet" href="/static/css/bootstrap-tour/bootstrap-tour.css" > -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <!-- ========== THEME CSS ========== -->
     <link rel="stylesheet" href="/static/css/result.css" media="screen" >
 
     <!-- ========== MODERNIZR ========== -->
     <script src="/static/js/modernizr/modernizr.min.js"></script>
-    <!-- ========== JQUERY ========== -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.loadtemplate/1.5.10/jquery.loadTemplate.min.js"></script>
+
+
 
 </head>
 <body>
@@ -72,7 +74,7 @@
                         <tr>
                             <td>
                                 <div class="custom-control custom-checkbox mb-3">
-                                    <input type="checkbox" class="custom-control-input" id="{{ i.bib }}" name="bib" value="{{ i.bib }}">
+                                    <input type="checkbox" class="custom-control-input" id="{{ i.bib }}" name="bib" value="{{ i.bib }}" >
                                     <label class="custom-control-label" for="{{ i.bib }}" ></label>
                                 </div>
                             </td>
@@ -112,18 +114,80 @@
     </div>
     <center>
         <div class="input-field third-wrap">
-            <button class="btn-primary" type="submit" onclick="return is_check();">Submit</button>
+
+            <button class="btn-primary" type="button" data-toggle="modal" data-target="#myModal">Check all and Submit</button>
+
+
+            <!-- The Modal -->
+              <div class="modal" id="myModal">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+
+
+                    <div class="modal-header">
+                      <h4 class="modal-title">READY TO PICK-UP</h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <div class="modal-body">
+
+                            <div class="form-row">
+                              <div class="col-md-12">
+                                <label for="validationServer01" style="color: midnightblue;">PLEASE FILL THE AUTHORIZED INFORMATION</label>
+                                <input id="name" name="name" type="text" class="form-controL"  placeholder="NAME & PHONE NUMBER" style="width: 90%; height:70%; border: 0.25px solid gray; padding-left: 20px;  " >
+                                  <input id="phone" name="phone" class="form-controL"  placeholder="NAME & PHONE NUMBER" style="width: 90%; height:70%; border: 0.25px solid gray; padding-left: 20px;  " >
+
+                              </div>
+                            </div>
+
+                            <div class="custom-control1 custom-checkbox">
+                              <input type="checkbox" class="custom-control-input" id="customCheck2">
+                              <label class="custom-control-label" for="customCheck2">PARTICIPANT PICK-UP</label>
+                            </div>
+
+
+                    </div>
+
+
+                    <div class="modal-footer-center">
+                      <div class="custom-control2 custom-checkbox">
+
+                        <input type="checkbox" class="custom-control-input" id="customCheck3">
+                        <label class="custom-control-label"  for="customCheck3">I CONFIRMED THAT I RECIVED MY RACE KITS ABD ALL ITEM(S)</label>
+                      </div>
+                      <button class="btnr" type="submit" data-toggle="modal" >CONFIRM</button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
         </div>
     </center>
-    <p></p>
+
 </form>
 
 
 </body>
 <script>
 
+      $(document).on('click', 'input[type="checkbox"]', function() {
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            if (this.id != "ad" && this.id != "customCheck2" && this.id != "customCheck3"){
+                for (var i = 0; i < checkboxes.length; i++) {
+                    if (checkboxes[i] != this){
+                        if (checkboxes[i].id != "ad" && checkboxes[i].id != "customCheck2" && checkboxes[i].id != "customCheck3"){
+                            if (checkboxes[i].id != this.id){
 
+                                checkboxes[i].checked = false;
 
+                            }
+                        }
+                    }
+
+                }
+            }
+        });
     function confirm_redict() {
         if (confirm('Are you sure to remove machine')){
             window.location.href = "/session_destroy"
@@ -162,5 +226,6 @@
         }
         return false;
     }
+
 </script>
 </html>

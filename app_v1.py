@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, session, flash, send_file,redirect
-from Customer import read_data
+from Customer import read_data,Customer
 import os
 from datetime import datetime
 import pandas as pd
@@ -228,27 +228,45 @@ def downloadFile ():
     df.to_excel(name_file)
     return send_file(name_file, as_attachment=True)
 
+@app.route('/download-all',methods=["GET","POST"])
+def downloadFileAll ():
+
+    data_file = {"bib":[],
+                 "name":[],
+                 "code":[],
+                 "distance":[],
+                 "passport":[],
+                 "phone":[],
+                 "dtime":[],
+                 "pPOS":[],
+                 "name_picked":[],
+                 "phone_pidcked": []
+                 }
+
+    for key, cus in list_cus.items():
+
+        data_file.get("bib").append((cus.bib))
+        data_file.get("name").append((cus.name))
+        data_file.get("code").append((cus.code))
+        data_file.get("distance").append((cus.distance))
+        data_file.get("passport").append((cus.passport))
+        data_file.get("phone").append((cus.phone))
+        data_file.get("dtime").append((cus.dtime))
+        data_file.get("pPOS").append(cus.pPOS)
+        data_file.get("name_picked").append(
+            (cus.name_picked))
+        data_file.get("phone_pidcked").append((cus.phone_pidcked))
+    df = pd.DataFrame.from_dict(data_file)
+    name_file = path_result + "/resutl.xlsx"
+
+    df.to_excel(name_file)
+    return send_file(name_file, as_attachment=True)
+
 @app.route('/clear-backup')
 def clear():
     rm_all(path_backup)
     rm_all(path_result)
     return admin()
-
-@app.route("/admin/live/",methods=["GET","POST"])
-def admin_live():
-    return render_template("live_admin.html",value={"total":len(list_cus)})
-
-@app.route("/completed",methods=["GET"])
-def count_complete():
-    return render_template("couter.html",value=counter_dis,total=[len(list_completed),len(list_cus)])
-
-@app.route("/live",methods=["GET","POST"])
-def live():
-    res = []
-    for i in list_completed:
-        res.append(list_cus.get(i).__dict__)
-
-    return render_template("compont_admin.html",value=res)
 
 @app.route("/info",methods=["POST","GET"])
 def info():
@@ -297,9 +315,6 @@ def c():
 
     return redirect("/admin")
 
-@app.route("/dashboard", methods=["GET","POS"])
-def dashboard():
-    return render_template("dashboard.html")
 
 @app.route("/new_clerk", methods=["GET","POST"])
 def new_page_clerk():
@@ -315,6 +330,8 @@ def new_page_clerk():
             category = loconf[0]
         requests = request.form.lists()
         key_form = [x for x in requests]
+        if len(key_form) == 0:
+            return  redirect("/")
         result_search = []
         is_right = False
         check_pos = []
@@ -359,7 +376,7 @@ def new_page_clerk():
                                 time_checked = i.dtime
                         else:
                             check_pos.append(i.__dict__)
-                print(result_search)
+
                 if  len(result_search) != 0 and is_right:
                     return render_template("new_page_clerk.html",value={"data": result_search, "error": "1",
                                                                         "id":session.get("index_session"),
@@ -388,22 +405,58 @@ def new_page_clerk():
 
 
 @app.route('/modify', methods=["POST"])
-def mo():
+def modif():
     form = request.form.lists()
     key_delete = [x for x in form]
     id = int(request.form.get("id_pos"))
+    print(key_delete)
 
     if len(key_delete) != 0:
+
+        name_picked = key_delete[2][1][0]
+        phone_picked = key_delete[3][1][0]
+        if name_picked == "":
+            cus = list_cus.get(key_delete[1][1][0])
+            name_picked = cus.name
+            phone_picked = cus.phone
         key_delete = key_delete[1][1]
         for i in key_delete:
             list_completed.append(i)
             cus = list_cus.get(i)
             cus.set_pickedup(datetime.now().__str__().split(".")[0])
             cus.set_pick(id)
-
+            cus.set_name_picked(name_picked)
+            cus.set_phone_picked(phone_picked)
     return redirect("/")
 
+@app.route('/change', methods=["GET", "POST"])
+def changeinfo():
+    key_search = request.form.get("id_search")
+    form = request.form.lists()
+    key_change = [x for x in form]
 
+    if key_search != None:
+        cus = list_cus.get(key_search)
+        if cus is None:
+            return render_template("changeinfo.html", value={"error":"3"})
+        return render_template("changeinfo.html", value={"data": [cus.__dict__],
+                                                         "error": "1"})
+    if len(key_change) != 0:
+        cus = list_cus.get(key_change[0][1][0])
+        if cus is None:
+
+            list_attribute = key_change[0][1]
+            cus = Customer(list_attribute[0],list_attribute[1],"khong co",list_attribute[5],list_attribute[2]
+                           ,list_attribute[4],list_attribute[6],list_attribute[3])
+
+            list_cus.update({list_attribute[0] : cus})
+
+            return render_template("changeinfo.html", value={"error": "4"})
+        else:
+            cus.edit(key_change[0][1])
+            return render_template("changeinfo.html", value={"error": "5"})
+
+    return render_template("changeinfo.html", value={"error":"2"})
 
 
 

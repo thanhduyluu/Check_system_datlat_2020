@@ -1,6 +1,8 @@
 import pandas as pd
+
+
 class Customer:
-    def __init__(self,bib,name,code,distance,passport,phone,email,DOB):
+    def __init__(self, bib, name, code, distance, passport, phone, email, DOB):
         self.bib = bib
         self.name = name
         self.code = code
@@ -9,29 +11,42 @@ class Customer:
         self.phone = phone
         self.email = email
         self.DOB = DOB
-        self.pickup = None
         self.dtime = None
         self.pPOS = None
         self.name_picked = None
         self.phone_pidcked = None
 
-    def compare(self,string):
+    def compare(self, string):
         return string == self.bib or string == self.name or string == self.code or string == self.passport or string == self.phone or string == self.email
 
-    def compare_bib(self,string):
+    def compare_bib(self, string):
         return string == self.bib
 
-    def compare_dis(self,string):
+    def compare_dis(self, string):
         return string == self.distance
 
-    def compare_code(self,string):
+    def compare_code(self, string):
         return string == self.code
 
     def set_pickedup(self, dtime):
-        self.pickup = True
         self.dtime = dtime
-    def set_pick(self,pPOS):
+
+    def set_pick(self, pPOS):
         self.pPOS = pPOS
+
+    def set_name_picked(self, name):
+        self.name_picked = name
+
+    def set_phone_picked(self, phone):
+        self.phone_pidcked = phone
+    def edit(self, list_attribute):
+        self.bib = list_attribute[0]
+        self.name = list_attribute[1]
+        self.passport= list_attribute[2]
+        self.DOB= list_attribute[3]
+        self.phone= list_attribute[4]
+        self.email = list_attribute[5]
+
 
 def read_data(path):
     df = pd.read_excel(path)
@@ -41,7 +56,7 @@ def read_data(path):
     passport = [str(x) if str(x) != "nan" else "Không có" for x in df["ID/Passport"]]
     phone = [str(x) if str(x) != "nan" else "Không có" for x in df["Phone Number"]]
     email = [str(x) if str(x) != "nan" else "Không có" for x in df["Email"]]
-    DOB = [str(x) if str(x) != "nan" else "Không có"  for x in df["DOB"]]
+    DOB = [str(x) if str(x) != "nan" else "Không có" for x in df["DOB"]]
     dis = list()
     setdis = set()
     for x in df["Attendent ticket type name"]:
@@ -49,8 +64,10 @@ def read_data(path):
         setdis.add(x)
 
     list_cus = []
-    for i in range(0,len(bib)):
-        list_cus.append(Customer(bib[i], name[i], code[i],dis[i],passport[i],phone[i],email[i],DOB[i]))
-    return dict(zip(bib,list_cus)),setdis
+    for i in range(0, len(bib)):
+        list_cus.append(Customer(bib[i], name[i], code[i], dis[i], passport[i], phone[i], email[i], DOB[i]))
+    return dict(zip(bib, list_cus)), setdis
+
+
 if __name__ == '__main__':
     read_data()
