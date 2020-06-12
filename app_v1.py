@@ -5,6 +5,8 @@ from datetime import datetime
 import pandas as pd
 import string
 import random
+import json
+import requests
 
 path = os.path.join(os.getcwd(),"static","ds.xlsx")
 path_backup = os.path.join(os.getcwd(),"static","backup","queue")
@@ -26,7 +28,7 @@ list_pw = list()
 config = dict()
 global PASSWORD
 PASSWORD = "techhaus"
-number_POS = 50
+number_POS = 20
 key_cus_mark = ["queue" + str(i) for i in range(number_POS)]
 list_cus_mark = [[] for i in range(number_POS)]
 all_list_cus_mark = dict(zip(key_cus_mark,list_cus_mark))
@@ -54,7 +56,7 @@ def save_backup(content,namefile):
 def save_compelete(content):
     s = ""
     for i in content:
-        s += i[0] + "\t" + i[1] + "\t"  + str(i[2]) + "\n"
+        s += i[0] + "\t" + i[1] + "\t"  + str(i[2]) + "\t" + str(i[3]) + "\t" + str(i[4]) + "\n"
     with open(path_result + "/complete.txt","a") as fw:
         fw.write(s)
 
@@ -66,17 +68,24 @@ def load_complete():
             list_completed.append(tmp[0])
             list_cus.get(tmp[0]).set_pick(tmp[2])
             list_cus.get(tmp[0]).set_pickedup(tmp[1])
+            list_cus.get(tmp[0]).set_phone_pick(tmp[4])
+            list_cus.get(tmp[0]).set_name_pick(tmp[3])
 
 
 
-def load_backup(content, namefile):
-    with open(namefile,"r") as fr:
-        for line in fr:
-            sub = list()
-            for bib in line.strip("\n").split("\t"):
-                if bib.strip("\t").strip("\n") != "" and bib.strip("\t").strip("\n") not in list_completed:
-                    sub.append(list_cus.get(bib).__dict__)
-            content.append(sub)
+def load_backup(content):
+    for key, val in dict(content).items():
+        list_completed.append(val["bib"])
+        cus = Customer(val["bib"], val["name"], val["code"], val["distance"], val["passport"], val["phone"], val["email"], val["DOB"])
+        cus.set_name_picked(val["name_picked"])
+        cus.set_phone_picked(val["phone_pidcked"])
+        cus.set_pPOS(val["pPOS"])
+        cus.set_dtime(val["dtime"])
+        cus.edit([val["new_BIB"],val["new_name"],val["new_passport"],val["new_DOB"],val["new_phone"],val["new_email"]])
+        cus.new_dtime(val["new_dtime"])
+        cus.new_pPOS(val["new_pPOS"])
+
+        list_cus.update({key:cus})
 
 def randompass():
     letters = string.ascii_lowercase
@@ -136,17 +145,12 @@ def do_config():
 
 @app.route('/load', methods=['POST'])
 def do_load_Backup():
-    load_complete()
-    try:
+    url = "http://47.241.0.30/getcomplete"
+    resp = requests.post(url=url)
 
-        key_admin = request.form.get("key_admin")
-        if key_admin == "1":
-            for i in os.listdir(path_backup):
-                path_file = os.path.join(path_backup,i)
-                key = i.strip(".txt")
-                load_backup(all_list_cus_mark.get(key),path_file)
-    except Exception as e:
-        print(e)
+    content = json.loads(resp.json())
+    load_backup(content)
+
     return redirect("/admin")
 
 @app.route('/login', methods=['POST'])
@@ -175,7 +179,7 @@ def init():
     except:
         return render_template("init.html", value={"error": "1"})
 
-    if id > 50 or id < 0:
+    if id > 20 or id < 0:
         return render_template("init.html", value={"error": "1"})
 
     if id >= len(list_pw):
@@ -228,7 +232,7 @@ def downloadFile ():
     df.to_excel(name_file)
     return send_file(name_file, as_attachment=True)
 
-@app.route('/download-all',methods=["GET","POST"])
+@app.route('/getall',methods=["GET","POST"])
 def downloadFileAll ():
 
     data_file = {"bib":[],
@@ -409,7 +413,6 @@ def modif():
     form = request.form.lists()
     key_delete = [x for x in form]
     id = int(request.form.get("id_pos"))
-    print(key_delete)
 
     if len(key_delete) != 0:
 
@@ -420,13 +423,19 @@ def modif():
             name_picked = cus.name
             phone_picked = cus.phone
         key_delete = key_delete[1][1]
+        content_save = []
         for i in key_delete:
             list_completed.append(i)
             cus = list_cus.get(i)
-            cus.set_pickedup(datetime.now().__str__().split(".")[0])
-            cus.set_pick(id)
+            cus.set_pPOS(id)
+            cus.set_dtime(datetime.now().__str__().split(".")[0])
             cus.set_name_picked(name_picked)
             cus.set_phone_picked(phone_picked)
+            content_save.append([i ,datetime.now().__str__().split(".")[0], id, name_picked, phone_picked])
+            send(cus.__dict__)
+            resp = send_choanhthang(cus,"pick")
+
+        save_compelete(content_save)
     return redirect("/")
 
 @app.route('/change', methods=["GET", "POST"])
@@ -442,25 +451,96 @@ def changeinfo():
         return render_template("changeinfo.html", value={"data": [cus.__dict__],
                                                          "error": "1"})
     if len(key_change) != 0:
-        cus = list_cus.get(key_change[0][1][0])
+        try:
+            cus = list_cus.get(key_change[1][1][0])
+        except:
+            cus = list_cus.get(key_change[0][1][0])
         if cus is None:
 
             list_attribute = key_change[0][1]
             cus = Customer(list_attribute[0],list_attribute[1],"khong co",list_attribute[5],list_attribute[2]
                            ,list_attribute[4],list_attribute[6],list_attribute[3])
-
+            cus.dtime = datetime.now()
+            cus.name_picked = list_attribute[1]
+            cus.phone_pidcked = list_attribute[6]
+            cus.pPOS = "POS INFOMATION"
             list_cus.update({list_attribute[0] : cus})
+            send(cus.__dict__)
+            send_choanhthang(cus,"new")
+
 
             return render_template("changeinfo.html", value={"error": "4"})
         else:
             cus.edit(key_change[0][1])
+            cus.set_new_pPOS("POS INFORMATION")
+            cus.set_new_dtime(datetime.now().__str__().split(".")[0])
+            send(cus.__dict__)
+            send_choanhthang(cus,"update")
+
             return render_template("changeinfo.html", value={"error": "5"})
 
     return render_template("changeinfo.html", value={"error":"2"})
 
+def ob2json_pick(cus, type):
+    name = str(cus.new_name).split(" ")
+    event_id = "5ed8a1585b16db5f7605efb4"
+    if type == "pick":
+        data_request = {
+            "event_id": event_id,
+            "bib": cus.bib
+        }
+    if type == "update":
+        data_request = {
+            "event_id": event_id,
+            "bib": cus.bib,
+            "new_data": {
+                "first_name": "".join(name[-1]),
+                "last_name": " ".join(name[:len(name) - 1]),
+                "full_name": str(cus.name),
+                "age": 0,
+                "gender": "",
+                "category_name_vi": cus.distance,
+                "category_name_en": cus.distance,
+                "group": "",
+                "email": cus.new_email,
+                "phone": cus.new_phone,
+                "id_card": cus.new_passport,
+                "blood_type": "",
+                "nationality": "",
+                "club": "",
+                "name_on_bib": "",
+                "emergency_contact_name": "",
+                "emergency_contact_relationship": "",
+                "emergency_contact_phone": "",
+                "medicine": "",
+                "allergy": "",
+                "tshirt_size": "",
+                "old_bib": cus.new_BIB,
+                "birthday_month": "string",
+                "birthday_day": "string",
+                "birthday_year": "string",
+                "birthday": cus.new_DOB,
+            }
+        }
 
+    return data_request
 
+def send(data):
+    url = "http://47.241.0.30/complete"
+    resp = requests.post(url=url,json=data)
+    return resp
 
+def send_choanhthang(data,type):
+    url = "https://uat.raceez.vn/api/result/internal/participants/race-kit"
+    header = {
+        "Authorization": "Basic ZTVhNTc5ZDctZDFlMC00OGFjLTk1ZGItN2UzNThhYTVjYjJiOjRiMWM1MDk4MzAwNGY0MGRiYTljNjk2MTM3MDA1NGNm"
+    }
+    data_send = ob2json_pick(data,type)
+
+    resp = requests.post(url=url,json=data_send,headers=header)
+    print("==========================================================")
+
+    return resp.json()
 
 if __name__ == '__main__':
     app.secret_key = 'super secret key'

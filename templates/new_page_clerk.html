@@ -16,11 +16,11 @@
 
     <!-- ========== PAGE STYLES ========== -->
     <!-- <link rel="stylesheet" href="/static/css/prism/prism.css" media="screen" >  -->
-    <!-- <link rel="stylesheet" href="/static/css/toastr/toastr.min.css" media="screen" >
-    <link rel="stylesheet" href="/static/css/icheck/skins/line/blue.css" >
-    <link rel="stylesheet" href="/static/css/icheck/skins/line/red.css" >
-    <link rel="stylesheet" href="/static/css/icheck/skins/line/green.css" >
-    <link rel="stylesheet" href="/static/css/bootstrap-tour/bootstrap-tour.css" > -->
+<!--    <link rel="stylesheet" href="/static/css/toastr/toastr.min.css" media="screen" >-->
+<!--    <link rel="stylesheet" href="/static/css/icheck/skins/line/blue.css" >-->
+<!--    <link rel="stylesheet" href="/static/css/icheck/skins/line/red.css" >-->
+<!--    <link rel="stylesheet" href="/static/css/icheck/skins/line/green.css" >-->
+<!--    <link rel="stylesheet" href="/static/css/bootstrap-tour/bootstrap-tour.css" >-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -74,7 +74,7 @@
                         <tr>
                             <td>
                                 <div class="custom-control custom-checkbox mb-3">
-                                    <input type="checkbox" class="custom-control-input" id="{{ i.bib }}" name="bib" value="{{ i.bib }}" >
+                                    <input type="checkbox" class="custom-control-input" id="{{ i.bib }}" name="bib" value="{{ i.bib }}" onchange="is_check_element()">
                                     <label class="custom-control-label" for="{{ i.bib }}" ></label>
                                 </div>
                             </td>
@@ -95,7 +95,7 @@
 
                     <tr>
                     <td>
-                        <input id="ad" type="checkbox" onclick="toggle(this,'ad')" name="bib" value={{i.bib}} />
+                        <input id="ad" type="checkbox" onclick="toggle(this,'ad')" name="bib" value={{i.bib}} onchange="is_check_element()" />
                     </td>
                     <td>{{i.code}}</td>
                     <td>{{i.bib}}</td>
@@ -112,37 +112,39 @@
             </tbody>
         </table>
     </div>
-    <center>
-        <div class="input-field third-wrap">
 
-            <button class="btn-primary" type="button" data-toggle="modal" data-target="#myModal">Check all and Submit</button>
+    <div class="container">
+        <div class="input-field">
+
+            <button class="btn-primary" type="button" data-toggle="modal" data-target="#myModal" id="pick" disabled>PICK</button>
 
 
             <!-- The Modal -->
-              <div class="modal" id="myModal">
+              <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                   <div class="modal-content">
 
 
                     <div class="modal-header">
-                      <h4 class="modal-title">READY TO PICK-UP</h4>
+
+                      <span class="modal-title">READY TO PICK-UP</span>
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
 
                     <div class="modal-body">
 
                             <div class="form-row">
-                              <div class="col-md-12">
+                              <div class="col-xs-12 col-md-12">
                                 <label for="validationServer01" style="color: midnightblue;">PLEASE FILL THE AUTHORIZED INFORMATION</label>
-                                <input id="name" name="name" type="text" class="form-controL"  placeholder="NAME & PHONE NUMBER" style="width: 90%; height:70%; border: 0.25px solid gray; padding-left: 20px;  " >
-                                  <input id="phone" name="phone" class="form-controL"  placeholder="NAME & PHONE NUMBER" style="width: 90%; height:70%; border: 0.25px solid gray; padding-left: 20px;  " >
+                                <input id="name" name="name" type="text" class="form-controL"  placeholder="NAME" style="width: 90%; height:70%; border: 0.25px solid gray; padding-left: 20px;  " >
+                                  <input id="phone" name="phone" class="form-controL"  placeholder="PHONE NUMBER" style="width: 90%; height:70%; border: 0.25px solid gray; padding-left: 20px;  " maxlength="10">
 
                               </div>
                             </div>
 
                             <div class="custom-control1 custom-checkbox">
                               <input type="checkbox" class="custom-control-input" id="customCheck2">
-                              <label class="custom-control-label" for="customCheck2">PARTICIPANT PICK-UP</label>
+                              <label class="custom-control-label" for="customCheck2" onclick="return toggle_paticipant()">PARTICIPANT PICK-UP</label>
                             </div>
 
 
@@ -153,9 +155,9 @@
                       <div class="custom-control2 custom-checkbox">
 
                         <input type="checkbox" class="custom-control-input" id="customCheck3">
-                        <label class="custom-control-label"  for="customCheck3">I CONFIRMED THAT I RECIVED MY RACE KITS ABD ALL ITEM(S)</label>
+                        <label class="custom-control-label"  for="customCheck3">I CONFIRMED THAT I RECIVED MY RACE KITS AND ALL ITEM(S)</label>
                       </div>
-                      <button class="btnr" type="submit" data-toggle="modal" >CONFIRM</button>
+                      <button class="btnr" type="submit" data-toggle="modal" onclick="return is_check()">CONFIRM</button>
                     </div>
 
                   </div>
@@ -163,10 +165,10 @@
               </div>
 
         </div>
-    </center>
+    </div>
 
-</form>
 
+ </form>
 
 </body>
 <script>
@@ -188,6 +190,8 @@
                 }
             }
         });
+
+
     function confirm_redict() {
         if (confirm('Are you sure to remove machine')){
             window.location.href = "/session_destroy"
@@ -208,8 +212,18 @@
         }
     }
 
-    function is_check() {
+    function toggle_paticipant(){
+        name = document.getElementById("name").value;
+        phone = document.getElementById("phone").value;
+        if (name !== "" && phone !== "" ){
+            alert("You can only check in here without entering name and phone number in two above boxes")
+            return false
+        }
+        return true
 
+    }
+
+    function is_check_element(){
         var a = false
         var checkboxes = document.querySelectorAll('input[type="checkbox"]');
         for (var i = 0; i < checkboxes.length; i++) {
@@ -217,14 +231,75 @@
                 a = true;
             }
         }
-        if (a === false) {
-            alert("You must check least one item")
-        } else {
-            if (confirm("Are you sure to pick up this race kit") === true) {
+        if (a === true) {
+           document.getElementById("pick").disabled = false;
+        }
+        else{
+            document.getElementById("pick").disabled = true
+        }
+
+
+    }
+
+    function is_check() {
+        var checkconfirm = document.getElementById("customCheck3");
+        var checkparticipant = document.getElementById("customCheck2");
+        name = document.getElementById("name").value;
+        phone = document.getElementById("phone").value;
+        console.log(name);
+        console.log(phone);
+
+
+        if (name === "" && phone === "" && checkparticipant.checked === false){
+            alert("You must check PARTICIPANT PICK-UP or enter NAME and PHONE NUMBER");
+            return false;
+
+        }
+
+        if (name !== "" && phone === ""){
+            alert("Please enter PHONE NUMBER");
+            return false;
+        }
+
+        if (name === "" && phone !== ""){
+            alert("Please enter NAME");
+            return false;
+        }
+
+        if (checkconfirm.checked === false){
+            alert("You must CONFIRMED THAT YOU RECIVED MY RACE KITS AND ALL ITEM(S)")
+            return false
+
+        }
+
+        if (confirm("Are you sure to pick up this race kit") === true) {
+            return true;
+        }
+
+
+
+        return false;
+    }
+
+    $(function() {
+        $("input[name='phone']").on('input', function(e) {
+            $(this).val($(this).val().replace(/[^0-9]/g, ''));
+        });
+    });
+
+    function onlynum() {
+        var ip = document.getElementById("phone");
+        if (res != '') {
+            if (isNaN(res)) {
+
+                // Set input value empty
+                ip.value = "";
+
+                return false;
+            } else {
                 return true
             }
         }
-        return false;
     }
 
 </script>

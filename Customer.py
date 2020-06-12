@@ -15,6 +15,14 @@ class Customer:
         self.pPOS = None
         self.name_picked = None
         self.phone_pidcked = None
+        self.new_BIB = None
+        self.new_name = None
+        self.new_passport = None
+        self.new_DOB = None
+        self.new_phone = None
+        self.new_email = None
+        self.new_pPOS = None
+        self.new_dtime = None
 
     def compare(self, string):
         return string == self.bib or string == self.name or string == self.code or string == self.passport or string == self.phone or string == self.email
@@ -28,24 +36,31 @@ class Customer:
     def compare_code(self, string):
         return string == self.code
 
-    def set_pickedup(self, dtime):
+    def set_dtime(self, dtime):
         self.dtime = dtime
 
-    def set_pick(self, pPOS):
+    def set_pPOS(self, pPOS):
         self.pPOS = pPOS
+
+    def set_new_pPOS(self, new_pPOS):
+        self.new_pPOS = new_pPOS
+
+    def set_new_dtime(self, dtime):
+        self.new_dtime = dtime
 
     def set_name_picked(self, name):
         self.name_picked = name
 
     def set_phone_picked(self, phone):
         self.phone_pidcked = phone
+
     def edit(self, list_attribute):
-        self.bib = list_attribute[0]
-        self.name = list_attribute[1]
-        self.passport= list_attribute[2]
-        self.DOB= list_attribute[3]
-        self.phone= list_attribute[4]
-        self.email = list_attribute[5]
+        self.new_BIB = list_attribute[0]
+        self.new_name = list_attribute[1]
+        self.new_passport= list_attribute[2]
+        self.new_DOB = list_attribute[3]
+        self.new_phone = list_attribute[4]
+        self.new_email = list_attribute[5]
 
 
 def read_data(path):
