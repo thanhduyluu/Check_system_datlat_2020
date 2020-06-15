@@ -1,0 +1,146 @@
+body{
+	font-family: Tahoma;
+}
+@media (min-width: 187px)  { 
+	.flex-container {
+		display: flex;
+		align-items: stretch;
+		background-color: white;
+		padding-top: 30px;
+	}
+	  
+	.flex-container > div {
+		width: 100px;
+		
+		text-align: center;
+		line-height: 75px;
+		font-size: 20px;
+		font-weight: bolder;
+		color: MidnightBlue;
+	  }
+	  
+	  
+
+}
+@media (min-width: 600px) {
+	html, body {
+	  font-size: calc( 12px + (14 - 12) * ((100vw - 600px) / (1140 - 600)));
+	}
+  }
+
+  @media (min-width: 375px)  { 
+	.table-responsive{
+		padding-left: 60px;
+		padding-right: 60px;
+		padding-top: 40px;
+	}
+	
+	.table1{
+		color: white;
+		background-color: midnightblue;
+		border: 1px solid midnightblue;
+	}
+
+
+}  
+
+  
+hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 0;
+    border-top: 3px solid MidnightBlue ;
+}
+.container{
+	width: 95%;
+}
+.row {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+#create{
+	flex: 0.5;
+	width: auto;
+    padding: 15px;
+	border: 1px solid MidnightBlue;
+	color: whitesmoke;
+	background-color: MidnightBlue;
+	font-weight: bolder;
+	font-size: 15px;
+	display: table;
+	margin: auto;
+	margin-top: 20px;
+ }
+h2{
+	color: white;
+}
+.container-fluid{
+	padding-top: 20px;
+}
+
+
+
+@media only screen and (min-width:768px) and (max-width: 1366px){
+	.table-responsive {
+		padding-left: 0px;
+		padding-right: 0px;
+		padding-top: 40px;
+	}
+	.container {
+		width: 100%;
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+}
+@media only screen and (min-width:1440px) and (max-width: 1599px){
+	.table-responsive {
+		padding-left: 50px;
+		padding-right: 50PX;
+		padding-top: 40px;
+	}
+}
+
+.btn-primary {
+	margin-left: 20px;
+    color: black;
+    background-color: #f5f5f5;
+    border-color: #2e6da4;
+}
+
+.btn3{
+	width: 100px;
+    height: 40px;
+    background-color: midnightblue;
+    color: white;
+    font-weight: bold;
+    border-color: midnightblue;
+}
+.btn1{
+	margin-top: 40px;
+	width: 100px;
+    height: 40px;
+    background-color: midnightblue;
+    color: white;
+    font-weight: bold;
+    border-color: midnightblue;
+}
+.btn2{
+	width: 330px;
+    height: 40px;
+    background-color: #860e0e;
+    color: white;
+    font-weight: bold;
+    border-color: #860e0e;
+
+}
+.pull-right {
+    margin-right: 55px;
+    height: 40px;
+    float: right!important;
+    width: 130px;
+    color: white;
+    background-color: midnightblue;
+    font-size: 16px;
+    font-weight: bold;
+}

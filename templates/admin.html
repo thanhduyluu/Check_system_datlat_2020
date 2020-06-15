@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ADMIN</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- ========== COMMON STYLES ========== -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" media="screen" >
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css" media="screen" >
+    <link rel="stylesheet" href="/static/css/animate-css/animate.min.css" media="screen" >
+    <link rel="stylesheet" href="/static/css/lobipanel/lobipanel.min.css" media="screen" >
+
+    
+  
+   
+ 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <!-- ========== THEME CSS ========== -->
+    <link rel="stylesheet" href="/static/css/dashboard.css" media="screen" >
+
+    <!-- ========== MODERNIZR ========== -->
+  
+    
+</head>
+<body>
+    <div class="flex-container">
+        <div style="flex-grow: 5">
+          <img width="300px" height="70px" src="../static/images/logo3.png"  alt="logo">
+        </div>
+        <div  style="flex-grow: 7">ADMIN</div>
+      </div>
+
+    <hr  width="100%" size="20px" align="center" color="black" height="10px">
+
+
+
+      
+      
+   
+  <br>
+
+  <div class="container"> 
+    <div class="row">
+    <div class="col-sm" style="background-color: midnightblue; color: white; height: 42px;">
+      <h4 style="padding-left: 8px; padding-top: 12px; font-weight: bold;">BACK-UP FILE</h4>
+    </div>
+  
+      
+    </div>
+    <div class="col-sm" style="background-color: #e5e5e5;  height: 135px; border: solid #e5e5e5; ">
+      <button class="btn1 btn-primary" type="submit">SUBMIT</button>
+      <button class="btn2 btn-danger" type="submit">CLEAR ALL BACKUP DATA</button>
+    </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="container"> 
+    <div class="row">
+    <div class="col-sm" style="background-color: midnightblue; color: white; height: 42px;">
+      <h4 style="padding-left: 8px; padding-top: 12px; font-weight: bold;">UPLOAD DATA</h4>
+    </div>
+    <div class="col-sm" id="bg1" style="background-color: #e5e5e5; height: 80px;
+    padding-top: 15px;">
+      <form class="MD-form" action="#">
+        <div class="file-field">
+          <div class="btn btn-primary btn-sm">
+            <span>Choose files</span>
+            <input type="file" multiple>
+          </div>
+         
+        </div>
+      </form>
+    </div>
+    <div class="col-sm" style="background-color: #e5e5e5;  height: 55px; border: solid #e5e5e5;">
+      <button class="btn3 btn-primary" type="submit">SUBMIT</button>
+    </div>
+    </div>
+  </div>
+
+   
+
+
+  <div class="table-responsive">
+    <table class="table"> 
+        <h4 style="font-weight: bold;    color: midnightblue;">POS CONFIG</h4>
+     <thead class="table1">
+       <tr>
+           <th scope="col">POS NO.</th>
+           <th scope="col">10KM</th>
+           <th scope="col">21KM</th>
+           <th scope="col">45KM</th>
+           <th scope="col">70KM</th>
+           <th scope="col">100KM</th>
+           <th scope="col">GROUP</th>
+         
+       
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+             <div class="custom-control">     
+                                                   <td>{{i.POSNO}}</td>
+                                                   <td>{{i.10KM}}</td>
+                                                   <td>{{i.21}}</td>
+                                                   <td>{{i.45}}</td>
+                                                   <td>{{i.70}}</td>
+                                                   <td>{{i.100}}</td>
+                                               
+                                             
+                                                   
+           </div>
+        </tr>
+       </tbody>
+   </table>
+   </div>
+   
+   <div class="footer">
+    <button type="button" id="btnSave" class="btn btn-default pull-right">+ MORE POS</button>
+    <button type="button" id="btnSave" class="btn btn-default pull-right">CONFIG</button>
+  </div>
+  
+
+    
+
+
+
+</body>
+</html>
