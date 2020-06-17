@@ -67,7 +67,7 @@
         window.alert("Your race kit is picking  in POS {{ value.POS }}")
     }
     if ({{ value.error }} == "5"){
-        window.alert("Your race kit is picked in POS {{ value.POS }} at {{ value.time }}")
+        window.alert("Your race kit is picked in POS {{ value.pos_check }} at {{ value.time }} by {{ value.name_pick}} and their phone is {{value.phone_pick}}")
     }
     if ({{ value.error }} == "1"){
         window.alert("You can pickup your race kit in POS {{ value.POS }}")

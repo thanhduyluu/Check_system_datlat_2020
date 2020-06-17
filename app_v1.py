@@ -204,34 +204,6 @@ def refresh_data():
             category = loconf[0]
         return render_template('search.html',value={"error": "10","id":session.get("index_session"),"category":category})
 
-
-@app.route('/download',methods=["GET","POST"])
-def downloadFile ():
-
-    data_file = {"bib":[],
-                 "name":[],
-                 "code":[],
-                 "distance":[],
-                 "passport":[],
-                 "phone":[],
-                 "dtime":[],
-                 "pPOS":[]}
-
-    for i in list_completed:
-        cus = list_cus.get(i)
-        data_file.get("bib").append(i)
-        data_file.get("name").append(cus.name)
-        data_file.get("code").append(cus.code)
-        data_file.get("distance").append(cus.distance)
-        data_file.get("passport").append(cus.passport)
-        data_file.get("phone").append(cus.phone)
-        data_file.get("dtime").append(cus.dtime)
-        data_file.get("pPOS").append(cus.pPOS)
-    df = pd.DataFrame.from_dict(data_file)
-    name_file = path_result + "/resutl.xlsx"
-    df.to_excel(name_file)
-    return send_file(name_file, as_attachment=True)
-
 @app.route('/getall',methods=["GET","POST"])
 def downloadFileAll ():
 
@@ -241,10 +213,23 @@ def downloadFileAll ():
                  "distance":[],
                  "passport":[],
                  "phone":[],
+                 "DOB":[],
+                 "T-shirt": [],
                  "dtime":[],
                  "pPOS":[],
                  "name_picked":[],
-                 "phone_pidcked": []
+                 "phone_pidcked": [],
+                 "T_shirt":[],
+                 "new_bib":[],
+                 "new_name":[],
+                 "new_passport":[],
+                 "new_DOB": [],
+                 "new_phone": [],
+                 "new_email":[],
+                 "new_pPOS":[],
+                 "new_dtime":[]
+
+
                  }
 
     for key, cus in list_cus.items():
@@ -255,10 +240,22 @@ def downloadFileAll ():
         data_file.get("distance").append((cus.distance))
         data_file.get("passport").append((cus.passport))
         data_file.get("phone").append((cus.phone))
+        data_file.get("DOB").append((cus.DOB))
+        data_file.get("T_shirt").append((cus.size))
         data_file.get("dtime").append((cus.dtime))
         data_file.get("pPOS").append(cus.pPOS)
-        data_file.get("name_picked").append(
-            (cus.name_picked))
+        data_file.get("name_picked").append((cus.name_picked))
+        data_file.get("phone_pidcked").append((cus.phone_pidked))
+        data_file.get("new_bib").append((cus.new_BIB))
+        data_file.get("new_name").append((cus.new_name))
+        data_file.get("new_passport").append((cus.new_passport))
+        data_file.get("new_DOB").append((cus.new_DOB))
+        data_file.get("new_email").append((cus.new_email))
+        data_file.get("new_phone").append((cus.new_phone))
+        data_file.get("new_pPOS").append((cus.new_pPOS))
+        data_file.get("new_dtime").append((cus.set_new_dtime))
+
+
         data_file.get("phone_pidcked").append((cus.phone_pidcked))
     df = pd.DataFrame.from_dict(data_file)
     name_file = path_result + "/resutl.xlsx"
@@ -272,34 +269,20 @@ def clear():
     rm_all(path_result)
     return admin()
 
-@app.route("/info",methods=["POST","GET"])
-def info():
-    key_form = request.form.get('id_search')
-    list_valid = []
-    if key_form != None:
-        for k,i in list_cus.items():
-            if i.compare(str(key_form)):
-                list_valid.append(i.__dict__)
-        if len(list_valid) != 0:
-            data = {"data":list_valid,
-                    "error": "2"}
-            return render_template("search_information.html", value=data)
-        else:
-            return render_template("search_information.html", value={"error":"3"})
-    else:
-        return render_template("search_information.html", value={"error":"0"})
-
 @app.route("/cf",methods=["GET","POST"])
 def cf():
-    k = [int(key) for key,val in config.items()]
-    v = [val for key,val in config.items()]
-    value = list()
+    if not session.get('logged_in'):
+        return render_template('login.html', error="0")
+    else:
+        k = [int(key) for key,val in config.items()]
+        v = [val for key,val in config.items()]
+        value = list()
 
-    for idx in range(len(list_pw)):
+        for idx in range(len(list_pw)):
 
-        value.append([k[idx], v[idx], list_pw[idx]])
+            value.append([k[idx], v[idx], list_pw[idx]])
 
-    return render_template("cf.html",value=value)
+        return render_template("cf.html",value=value)
 
 @app.route("/clear-data", methods=["GET","POST"])
 def c():
@@ -341,6 +324,8 @@ def new_page_clerk():
         check_pos = []
         pos_checked = ""
         time_checked = ""
+        name_pick = ""
+        phone_pick = ""
         if  key_form[0][0] == "id_search":
             key = key_form[0][1][0]
             if category == "Group":
@@ -351,16 +336,24 @@ def new_page_clerk():
                         else:
                             pos_checked = str(i.pPOS)
                             time_checked = i.dtime
+                            name_pick = i.name_picked
+                            phone_pick = i.phone_picked
                 if len(result_search) == 0 and pos_checked != "":
                     return render_template('search.html',value={"error": "5",
                                                                 "POS": str(int(id) + 1),
+                                                                "pos_check":(int(pos_checked) + 1),
                                                                 "time": str(time_checked),
+                                                                "phone_pick": str(phone_pick),
+                                                                "name_pick":str(name_pick),
                                                                 "id":session.get("index_session"),
                                                                 "category":category})
                 elif len(result_search) == 0 and pos_checked == "":
                     return render_template('search.html',value={"error": "3",
                                                                 "POS": str(int(id) + 1),
+                                                                 "pos_check":(int(pos_checked) + 1),
                                                                 "time": str(time_checked),
+                                                                "phone_pick": str(phone_pick),
+                                                                "name_pick":str(name_pick),
                                                                 "id":session.get("index_session"),
                                                                 "category":category})
 
@@ -378,6 +371,11 @@ def new_page_clerk():
                             else:
                                 pos_checked = str(i.pPOS)
                                 time_checked = i.dtime
+                                name_pick = i.__dict__.get("name_picked")
+                                phone_pick = i.__dict__.get("phone_picked")
+                                print(name_pick)
+                                print(phone_pick)
+
                         else:
                             check_pos.append(i.__dict__)
 
@@ -389,14 +387,20 @@ def new_page_clerk():
                 if len(result_search) == 0 and pos_checked != "":
                     return render_template('search.html',value={"error": "5",
                                                                 "POS": str(int(id) + 1),
+                                                                "pos_check":str(int(pos_checked) + 1),
                                                                 "time": str(time_checked),
+                                                                "phone_pick": str(phone_pick),
+                                                                "name_pick":str(name_pick),
                                                                 "id":session.get("index_session"),
                                                                 "category":category})
 
                 elif len(check_pos) != 0:
                     return render_template('search.html',value={"error": "6",
                                                                 "POS": str(int(id) + 1),
+                                                                 "pos_check":(int(pos_checked) + 1),
                                                                 "time": str(time_checked),
+                                                                "phone_pick": str(phone_pick),
+                                                                "name_pick":str(name_pick),
                                                                 "id":session.get("index_session"),
                                                                 "category":category})
 
@@ -492,7 +496,7 @@ def ob2json_pick(cus, type):
             "pos": cus.pPOS,
             "pick_time":cus.dtime,
             "name_pick":cus.name_picked,
-            "phone_pick":cus.phone_pidcked
+            "phone_pick":cus.phone_picked
 
         }
     if type == "update":
@@ -500,6 +504,7 @@ def ob2json_pick(cus, type):
             "event_id": event_id,
             "bib": cus.bib,
             "new_data": {
+                "bib": cus.new_BIB,
                 "first_name": "".join(name[-1]),
                 "last_name": " ".join(name[:len(name) - 1]),
                 "full_name": str(cus.name),
@@ -521,7 +526,7 @@ def ob2json_pick(cus, type):
                 "medicine": "",
                 "allergy": "",
                 "tshirt_size": "",
-                "old_bib": cus.new_BIB,
+                "old_bib": cus.bib,
                 "birthday_month": "string",
                 "birthday_day": "string",
                 "birthday_year": "string",
@@ -529,7 +534,7 @@ def ob2json_pick(cus, type):
                 "pos": cus.pPOS,
                 "pick_time": cus.dtime,
                 "name_pick": cus.name_picked,
-                "phone_pick": cus.phone_pidcked
+                "phone_pick": cus.phone_picked
 
             }
         }
