@@ -477,6 +477,7 @@ def changeinfo():
             send(cus.__dict__)
             send_choanhthang(cus,"update")
 
+
             return render_template("changeinfo.html", value={"error": "5"})
 
     return render_template("changeinfo.html", value={"error":"2"})
@@ -487,7 +488,12 @@ def ob2json_pick(cus, type):
     if type == "pick":
         data_request = {
             "event_id": event_id,
-            "bib": cus.bib
+            "bib": cus.bib,
+            "pos": cus.pPOS,
+            "pick_time":cus.dtime,
+            "name_pick":cus.name_picked,
+            "phone_pick":cus.phone_pidcked
+
         }
     if type == "update":
         data_request = {
@@ -520,6 +526,11 @@ def ob2json_pick(cus, type):
                 "birthday_day": "string",
                 "birthday_year": "string",
                 "birthday": cus.new_DOB,
+                "pos": cus.pPOS,
+                "pick_time": cus.dtime,
+                "name_pick": cus.name_picked,
+                "phone_pick": cus.phone_pidcked
+
             }
         }
 
@@ -535,11 +546,12 @@ def send_choanhthang(data,type):
     header = {
         "Authorization": "Basic ZTVhNTc5ZDctZDFlMC00OGFjLTk1ZGItN2UzNThhYTVjYjJiOjRiMWM1MDk4MzAwNGY0MGRiYTljNjk2MTM3MDA1NGNm"
     }
-    data_send = ob2json_pick(data,type)
 
+    data_send = ob2json_pick(data,type)
+    print(data_send)
     resp = requests.post(url=url,json=data_send,headers=header)
     print("==========================================================")
-
+    print(resp.json())
     return resp.json()
 
 if __name__ == '__main__':
