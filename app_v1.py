@@ -76,14 +76,14 @@ def load_complete():
 def load_backup(content):
     for key, val in dict(content).items():
         list_completed.append(val["bib"])
-        cus = Customer(val["bib"], val["name"], val["code"], val["distance"], val["passport"], val["phone"], val["email"], val["DOB"])
+        cus = Customer(val["bib"], val["name"], val["code"], val["distance"], val["passport"], val["phone"], val["email"], val["DOB"],val["size"])
         cus.set_name_picked(val["name_picked"])
-        cus.set_phone_picked(val["phone_pidcked"])
+        cus.set_phone_picked(val["phone_picked"])
         cus.set_pPOS(val["pPOS"])
         cus.set_dtime(val["dtime"])
         cus.edit([val["new_BIB"],val["new_name"],val["new_passport"],val["new_DOB"],val["new_phone"],val["new_email"]])
-        cus.new_dtime(val["new_dtime"])
-        cus.new_pPOS(val["new_pPOS"])
+        cus.set_new_dtime(val["new_dtime"])
+        cus.set_new_pPOS(val["new_pPOS"])
 
         list_cus.update({key:cus})
 
@@ -145,10 +145,12 @@ def do_config():
 
 @app.route('/load', methods=['POST'])
 def do_load_Backup():
-    url = "http://47.241.0.30/getcomplete"
+    url = "http://47.241.0.30/api/getcomplete"
     resp = requests.post(url=url)
-
+    print(resp)
+    print(resp.json())
     content = json.loads(resp.json())
+    print(content)
     load_backup(content)
 
     return redirect("/admin")
@@ -542,7 +544,7 @@ def ob2json_pick(cus, type):
     return data_request
 
 def send(data):
-    url = "http://47.241.0.30/complete"
+    url = "http://47.241.0.30/api/complete"
     resp = requests.post(url=url,json=data)
     return resp
 
